@@ -1,5 +1,12 @@
+import { FormProvider } from "./context/FormContext"
+import MultiStepForm from "./pages/MultiStepForm"
+
 function App() {
-  return <h1 className="text-3xl font-bold underline">Hello World!</h1>
+  return (
+    <FormProvider>
+      <MultiStepForm />
+    </FormProvider>
+  )
 }
 
 export default App
