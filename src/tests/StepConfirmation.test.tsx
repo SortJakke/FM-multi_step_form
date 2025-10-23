@@ -1,17 +1,18 @@
-import { render, screen } from "@testing-library/react"
+import { screen } from "@testing-library/react"
 import { describe, it, expect } from "vitest"
 import "@testing-library/jest-dom"
 
 import StepConfirmation from "../components/StepConfirmation"
+import { renderWithProvider } from "./utils/renderWithProvider"
 
 describe("StepConfirmation", () => {
   it("must render the confirmation title", () => {
-    render(<StepConfirmation />)
+    renderWithProvider(<StepConfirmation />)
     expect(screen.getByText(/Finishin up/i)).toBeInTheDocument()
   })
 
   it('should render "Back" and "Confirm" buttons', () => {
-    render(<StepConfirmation />)
+    renderWithProvider(<StepConfirmation />)
     expect(screen.getByRole("button", { name: /Go Back/i })).toBeInTheDocument()
     expect(screen.getByRole("button", { name: /Confirm/i })).toBeInTheDocument()
   })

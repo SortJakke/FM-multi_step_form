@@ -1,11 +1,11 @@
-import { render, screen } from "@testing-library/react"
-import { FormProvider } from "../context/FormContext"
+import { screen } from "@testing-library/react"
 import { useFormContext } from "../context/useFormContext"
 
 import userEvent from "@testing-library/user-event"
 import "@testing-library/jest-dom"
 
 import { describe, it, expect } from "vitest"
+import { renderWithProvider } from "./utils/renderWithProvider"
 
 const TestComponent = () => {
   const { formData, setFormData, currentStep, nextStep } = useFormContext()
@@ -25,12 +25,8 @@ const TestComponent = () => {
 }
 
 describe("FormContext", () => {
-  it("deve atualizar o nome e avançar etapa", async () => {
-    render(
-      <FormProvider>
-        <TestComponent />
-      </FormProvider>
-    )
+  it("must update the name and advance step", async () => {
+    renderWithProvider(<TestComponent />)
 
     expect(screen.getByText(/name:/i)).toHaveTextContent("Name:")
     expect(screen.getByText(/step:/i)).toHaveTextContent("Step: 0")
