@@ -16,8 +16,8 @@ describe("StepPlanSelection", () => {
   it("should render monthly/annual billing switch", () => {
     renderWithProvider(<StepPlanSelection />)
     expect(screen.getByRole("switch")).toBeInTheDocument()
-    expect(screen.getByText(/monthly/i)).toBeInTheDocument()
-    expect(screen.getByText(/Yearly/i)).toBeInTheDocument()
+    expect(screen.getByTestId("billing-monthly")).toBeInTheDocument()
+    expect(screen.getByTestId("billing-yearly")).toBeInTheDocument()
   })
 
   it('should render "Back" and "Next" buttons', () => {
