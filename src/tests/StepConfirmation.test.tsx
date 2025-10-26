@@ -8,7 +8,7 @@ import { renderWithProvider } from "./utils/renderWithProvider"
 describe("StepConfirmation", () => {
   it("must render the confirmation title", () => {
     renderWithProvider(<StepConfirmation />)
-    expect(screen.getByText(/Finishin up/i)).toBeInTheDocument()
+    expect(screen.getByText(/Finishing up/i)).toBeInTheDocument()
   })
 
   it('should render "Back" and "Confirm" buttons', () => {

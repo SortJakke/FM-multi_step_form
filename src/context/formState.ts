@@ -8,6 +8,7 @@ export interface FormContextType {
   goToStep: (step: number) => void
   nextStep: () => void
   prevStep: () => void
+  changeStep: (n: number) => void
 }
 
 export const defaultData: FormData = {

@@ -17,6 +17,8 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
     setCurrentStep((prev) => prev + 1)
   const prevStep: FormContextType["prevStep"] = () =>
     setCurrentStep((prev) => prev - 1)
+  const changeStep: FormContextType["changeStep"] = (n: number) =>
+    setCurrentStep((prev) => prev - n)
 
   return (
     <FormContext.Provider
@@ -27,6 +29,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
         goToStep,
         nextStep,
         prevStep,
+        changeStep,
       }}
     >
       {children}
