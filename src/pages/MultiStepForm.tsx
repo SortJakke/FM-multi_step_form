@@ -3,6 +3,7 @@ import StepPersonalInfo from "../components/StepPersonalInfo"
 import StepPlanSelection from "../components/StepPlanSelection"
 import StepAddOns from "../components/StepAddOns"
 import StepConfirmation from "../components/StepConfirmation"
+import StepThanks from "../components/StepThanks"
 
 function MultiStepForm() {
   const { currentStep } = useFormContext()
@@ -17,6 +18,8 @@ function MultiStepForm() {
         return <StepAddOns/>
       case 3:
         return <StepConfirmation/>
+      case 4:
+        return <StepThanks/>
       default:
         return <div>Unknown Step</div>
     }
