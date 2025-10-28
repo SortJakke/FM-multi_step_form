@@ -61,12 +61,17 @@ function StepAddOns() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-blue-950">
-      <div className="flex flex-col gap-4 rounded-md bg-white p-6">
-        <h2 className="text-xl font-bold">Pick add-ons</h2>
-        <p className="text-gray-500">
-          Add-ons help enhance your gaming experience.
-        </p>
+    <form
+      onSubmit={handleSubmit}
+      className="h-full md:w-lg flex flex-col justify-between gap-4 md:p-6 text-blue-950"
+    >
+      <div className="flex flex-col gap-10 rounded-md bg-white px-6 py-8 md:p-0">
+        <div className="space-y-2">
+          <h2 className="text-2xl md:text-3xl font-bold">Pick add-ons</h2>
+          <p className="text-gray-500">
+            Add-ons help enhance your gaming experience.
+          </p>
+        </div>
 
         <div className="flex flex-col gap-3">
           {availableAddOns.map((addOn) => {
@@ -76,8 +81,8 @@ function StepAddOns() {
             return (
               <label
                 key={addOn.name}
-                className={`flex items-center justify-between border p-3 rounded-lg cursor-pointer ${
-                  isChecked ? "border-purple-600 bg-blue-100" : "border-blue-100"
+                className={`flex items-center justify-between border p-3 rounded-lg cursor-pointer hover:border-purple-600 ${
+                  isChecked ? "border-blue-950 bg-blue-100" : "border-gray-500"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -101,7 +106,7 @@ function StepAddOns() {
                   </div>
                   <div>
                     <p className="font-medium">{addOn.name}</p>
-                    <p className="text-sm text-gray-500">{addOn.description}</p>
+                    <p className="text-xs text-gray-500">{addOn.description}</p>
                   </div>
                 </div>
                 <span className="text-sm text-purple-600">
@@ -117,13 +122,13 @@ function StepAddOns() {
         <button
           type="button"
           onClick={prevStep}
-          className="font-medium text-gray-500 px-4 py-2 rounded"
+          className="font-medium text-gray-500 px-4 py-2 rounded cursor-pointer hover:text-blue-950"
         >
           Go Back
         </button>
         <button
           type="submit"
-          className="bg-blue-950 text-white px-4 py-2 rounded"
+          className="w-32 bg-blue-950 text-white py-3 rounded cursor-pointer hover:bg-purple-600"
         >
           Next Step
         </button>
