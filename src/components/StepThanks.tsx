@@ -10,7 +10,11 @@ function StepThanks() {
       <div className="w-16 h-16 mx-auto mb-4" aria-hidden="true">
         <img src={checked} alt="" aria-hidden="true" />
       </div>
-      <h1 id="thanks-heading" className="text-3xl font-bold text-blue-950">
+      <h1
+        id="thanks-heading"
+        data-testid="thanks-title"
+        className="text-3xl font-bold text-blue-950"
+      >
         Thank You!
       </h1>
       <p role="status" aria-live="polite" className="text-gray-500">
