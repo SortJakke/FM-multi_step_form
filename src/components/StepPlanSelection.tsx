@@ -30,26 +30,36 @@ function StepPlanSelection() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="h-full md:w-lg flex flex-col justify-between gap-4 md:p-6 text-blue-950"
+      className="w-full h-full md:w-lg flex flex-col justify-between gap-4 md:p-6 text-blue-950"
     >
       <div className="flex flex-col gap-10 rounded-md bg-white px-6 py-8 md:p-0">
         <div className="space-y-2">
-          <h2 className="text-2xl md:text-3xl font-bold">Select your plan</h2>
+          <h1 id="plan-heading" className="text-2xl md:text-3xl font-bold">
+            Select your plan
+          </h1>
           <p className="text-gray-500">
             You have the option of monthly or yearly billing.
           </p>
         </div>
         <div className="space-y-10">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div
+            role="radiogroup"
+            aria-labelledby="plan-heading"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          >
             {plans.map((plan) => {
               const isSelected = formData.plan === plan.name
+              const keyBase = plan.name.toLowerCase
 
               return (
                 <button
                   key={plan.name}
                   type="button"
                   onClick={() => handlePlanSelect(plan.name)}
-                  className={`flex gap-4 border-2 p-4 rounded-lg cursor-pointer hover:border-blue-950 ${
+                  aria-describedby={`${keyBase}-price ${
+                    formData.billing === "yearly" ? `${keyBase}-discount` : ""
+                  }`}
+                  className={`flex gap-4 border-2 p-4 rounded-lg cursor-pointer hover:border-blue-950 focus:outline-none focus:ring-2 focus:ring-purple-600 ${
                     isSelected
                       ? "border-blue-950 bg-blue-100"
                       : "border-gray-500"
@@ -68,12 +78,15 @@ function StepPlanSelection() {
                   />
                   <div className="text-start md:space-y-1.5">
                     <h3 className="font-semibold">{plan.name}</h3>
-                    <p className="text-sm text-gray-500">
+                    <p
+                      id={`${keyBase}-price`}
+                      className="text-sm text-gray-500"
+                    >
                       {formData.billing === "monthly"
                         ? `$${plan.monthlyPrice}/mo`
                         : `$${plan.yearlyPrice}/yr`}
                     </p>
-                    <p className="text-xs">
+                    <p id={`${keyBase}-discount`} className="text-xs">
                       {formData.billing === "yearly" ? "2 months free" : ""}
                     </p>
                   </div>
@@ -98,6 +111,12 @@ function StepPlanSelection() {
                 className="sr-only peer"
                 checked={formData.billing === "yearly"}
                 onChange={toggleBilling}
+                onKeyDown={(e) => {
+                  if (e.key === " " || e.key === "Enter") {
+                    e.preventDefault()
+                    toggleBilling()
+                  }
+                }}
                 aria-label="Toggle billing period"
                 title="Toggle billing period"
               />

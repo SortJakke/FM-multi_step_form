@@ -63,11 +63,11 @@ function StepAddOns() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="h-full md:w-lg flex flex-col justify-between gap-4 md:p-6 text-blue-950"
+      className="w-full h-full md:w-lg flex flex-col justify-between gap-4 md:p-6 text-blue-950"
     >
       <div className="flex flex-col gap-10 rounded-md bg-white px-6 py-8 md:p-0">
         <div className="space-y-2">
-          <h2 className="text-2xl md:text-3xl font-bold">Pick add-ons</h2>
+          <h1 className="text-2xl md:text-3xl font-bold">Pick add-ons</h1>
           <p className="text-gray-500">
             Add-ons help enhance your gaming experience.
           </p>
@@ -77,6 +77,9 @@ function StepAddOns() {
           {availableAddOns.map((addOn) => {
             const isChecked = formData.addOns.some((a) => a.name === addOn.name)
             const price = getPrice(addOn.name, formData.billing)
+            const idBase = `addon-${addOn.name
+              .toLowerCase()
+              .replace(/\s+/g, "-")}`
 
             return (
               <label
@@ -84,18 +87,28 @@ function StepAddOns() {
                 className={`flex items-center justify-between border p-3 rounded-lg cursor-pointer hover:border-purple-600 ${
                   isChecked ? "border-blue-950 bg-blue-100" : "border-gray-500"
                 }`}
+                onKeyDown={(e) => {
+                  if (e.key === " " || e.key === "Enter") {
+                    e.preventDefault()
+                    toggleAddOn(addOn.name)
+                  }
+                }}
               >
                 <div className="flex items-center gap-3">
                   <input
+                    id={idBase}
                     type="checkbox"
                     checked={isChecked}
                     onChange={() => toggleAddOn(addOn.name)}
                     className="sr-only peer"
+                    aria-describedby={`${idBase}-desc ${idBase}-price`}
                   />
                   <div className="w-5 h-5 bg-blue-50 rounded border border-gray-500 peer-focus:ring peer-focus:ring-blue-500 peer-checked:bg-purple-600 peer-checked:border-transparent flex items-end justify-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="w-4 h-4 text-blue-50"
+                      aria-hidden="true"
+                      focusable="false"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -105,11 +118,18 @@ function StepAddOns() {
                     </svg>
                   </div>
                   <div>
-                    <p className="font-medium">{addOn.name}</p>
-                    <p className="text-xs text-gray-500">{addOn.description}</p>
+                    <p id={`${idBase}-label`} className="font-medium">
+                      {addOn.name}
+                    </p>
+                    <p id={`${idBase}-desc`} className="text-xs text-gray-500">
+                      {addOn.description}
+                    </p>
                   </div>
                 </div>
-                <span className="text-sm text-purple-600">
+                <span
+                  id={`${idBase}-price`}
+                  className="text-sm text-purple-600"
+                >
                   +${price}/{formData.billing === "monthly" ? "mo" : "yr"}
                 </span>
               </label>
