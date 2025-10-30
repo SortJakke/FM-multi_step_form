@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:component": "vitest --run"
+    "test:component": "vitest --run",
+    "test:e2e": "npx playwright test ./e2e"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.15",

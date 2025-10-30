@@ -104,7 +104,10 @@ function StepPlanSelection() {
             >
               Monthly
             </span>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label
+              data-testid="switch-billing"
+              className="relative inline-flex items-center cursor-pointer"
+            >
               <input
                 type="checkbox"
                 role="switch"
